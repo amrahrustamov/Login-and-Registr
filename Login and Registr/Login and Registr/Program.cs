@@ -12,61 +12,70 @@ namespace Login_and_Registr
         public Profile(string firstName, string lastName, string email, string password)
         {
             _firstName = firstName;
-            _lastName = lastName;
-            _email = email;
-            _password = password;
-        }
+            _lastName  = lastName;
+            _email     = email;
+            _password  = password;
+        }        
     }    
     internal class Program
     {
         static void Main(string[] args)
-        { 
-            List<Profile> profiles = new List<Profile>();
-
-            Console.WriteLine("1. /register");
-            Console.WriteLine("2. /login");
-            Console.WriteLine("3. /exit");
-
-            Console.WriteLine("");
-            Console.Write("Add your choise : ");
-            string command = Console.ReadLine();
-            Console.WriteLine("");
-
-            switch (command)
+        {            
+            while(true)
             {
-                case "/register":
-                    bool register = Register(command);
-                    break;
+                  Console.WriteLine("");
+                  Console.WriteLine("1. /register");
+                  Console.WriteLine("2. /login");
+                  Console.WriteLine("3. /exit");
 
-                case "/login":
-                    bool login = Login(command);
-                    break;
+                  Console.WriteLine("");
+                  Console.Write("Add your choise : ");
+                  string command = Console.ReadLine()!;
+         
+                  switch (command)
+                  {
+                      case "/register":
+                          bool register = Register(command);
+                          break;
 
-                case "/exit":
-                    Console.WriteLine("");
-                    Console.WriteLine("Bye bye");
-                    break;
+                      case "/login":
+                          bool login = Login(command);
+                          break;
+
+                      case "/exit":
+                          Console.WriteLine("");
+                          Console.WriteLine("Bye bye");
+                        return;
+                  }           
             }
         }
-
         #region Menu
         public static bool Register(string command)
         {
-            if(command == "/register")
+            string firstName,lastName,email, password;
+            
+            if (command == "/register")
             {                
-                bool isFirstNameLengthTrue = IsFirstNameLength();
-                bool isLastNameLengthTrue = IsLastNameLength();
-                bool isEmailTrue = IsEmailTrue();
-                bool isPasswordTrue = IsPasswordTrue();
-                return true;
+                bool isFirstNameLengthTrue = IsFirstNameLength(out firstName);
+                bool isLastNameLengthTrue = IsLastNameLength(out lastName);
+                bool isEmailTrue = IsEmailTrue(out email);
+                bool isPasswordTrue = IsPasswordTrue(out password);
+
+                Console.WriteLine("");
+                Console.WriteLine("You successfully registered, now you can login with your new account!");
+                                
+                List<Profile> profiles = new List<Profile>();
+                Profile profile = new Profile(firstName, lastName, email, password);
+                profiles.Add(profile);
+
+                return true;                
             }
             return false;
         }
         public static bool Login(string command) ////Didnt completed
         {
             if (command == "/login")
-            {
-                
+            {                
                 return true;
             }
             return false;
@@ -74,72 +83,68 @@ namespace Login_and_Registr
         #endregion
 
         #region Utility
-        public static bool IsFirstNameLength()
+        public static bool IsFirstNameLength(out string firstName)
         {
             while (true)
             {
                 Console.WriteLine("");
-                Console.WriteLine(" Enter first name : ");
-                 string firstName = Console.ReadLine();
+                Console.Write("Enter first name : ");
+                firstName = Console.ReadLine()!;
 
                  if(firstName.Length >= 3 && firstName.Length <= 30)
                      return true;  
                  
                  Console.WriteLine("Incorrect input!");
                  Console.WriteLine("Must be between 3 and 30 characters"); 
-            }
+            }            
         }
-        public static bool IsLastNameLength()
-        {
+        public static bool IsLastNameLength(out string lastName)
+        {           
             while (true)
             {
-                Console.WriteLine("");
-                Console.WriteLine(" Enter last name : ");
-                string lastName = Console.ReadLine();
+                Console.Write("Enter last name : ");
+                lastName = Console.ReadLine()!;
 
                 if (lastName.Length >= 5 && lastName.Length <= 20)
                     return true;
 
                 Console.WriteLine("Incorrect input!");
-                Console.WriteLine("Must be between 5 and 20 characters");
-            }
+                Console.WriteLine("Must be between 5 and 20 characters");                
+            }            
         }
-        public static bool IsEmailTrue()
+        public static bool IsEmailTrue(out string email)
         {
             while (true)
             {
-                Console.WriteLine("");
-                Console.WriteLine("Enter email :");
-                string addEmail = Console.ReadLine();
+                Console.Write("Enter email :");
+                email = Console.ReadLine()!;
 
-            for(int i = 0; i < addEmail.Length; i++)
+            for(int i = 0; i < email.Length; i++)
                 {
-                    if (addEmail[i] == '@')
+                    if (email[i] == '@')
                         return true;
                 }
                 Console.WriteLine("Incorrect input!");
                 Console.WriteLine("Email must contain 1 '@' symbol");
             }
         }
-        public static bool IsPasswordTrue()
+        public static bool IsPasswordTrue(out string password)
         {
             while (true)
             {
-                Console.WriteLine("");
-                Console.WriteLine("Enter password :");
-                string addPassword = Console.ReadLine();
+                Console.Write("Enter password :");
+                password = Console.ReadLine()!;
 
-                Console.WriteLine("");
-                Console.WriteLine("Re-enter the password");
-                string testPassword = Console.ReadLine();
+                Console.Write("Re-enter password : ");
+                string testPassword = Console.ReadLine()!;
                 
-                if(addPassword == testPassword)
+                if(password == testPassword)
                 {
                     return true;
                 }                
                 Console.WriteLine("Incorrect input!");
                 Console.WriteLine("Passwords do not match");
-            }
+            }           
         }
         #endregion
 
@@ -149,6 +154,5 @@ namespace Login_and_Registr
 
 
         #endregion
-
     }
 }
