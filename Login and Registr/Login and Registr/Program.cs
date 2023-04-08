@@ -19,6 +19,7 @@ namespace Login_and_Registr
     }    
     internal class Program
     {
+        public static List<Profile> profiles = new List<Profile>();
         static void Main(string[] args)
         {            
             while(true)
@@ -64,7 +65,7 @@ namespace Login_and_Registr
                 Console.WriteLine("");
                 Console.WriteLine("You successfully registered, now you can login with your new account!");
                                 
-                List<Profile> profiles = new List<Profile>();
+                
                 Profile profile = new Profile(firstName, lastName, email, password);
                 profiles.Add(profile);
 
@@ -76,6 +77,12 @@ namespace Login_and_Registr
         {
             if (command == "/login")
             {                
+
+
+
+
+
+
                 return true;
             }
             return false;
@@ -139,20 +146,11 @@ namespace Login_and_Registr
                 string testPassword = Console.ReadLine()!;
                 
                 if(password == testPassword)
-                {
-                    return true;
-                }                
+                    return true;                
                 Console.WriteLine("Incorrect input!");
                 Console.WriteLine("Passwords do not match");
             }           
         }
-        #endregion
-
-        #region Get Data
-
-
-
-
         #endregion
     }
 }
