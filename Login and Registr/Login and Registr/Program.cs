@@ -20,10 +20,11 @@ namespace Login_and_Registr
     internal class Program
     {
         public static List<Profile> profiles = new List<Profile>();
+        
         static void Main(string[] args)
-        {            
-            while(true)
-            {
+        {
+            while (true)
+            {                  
                   Console.WriteLine("");
                   Console.WriteLine("1. /register");
                   Console.WriteLine("2. /login");
@@ -40,14 +41,16 @@ namespace Login_and_Registr
                           break;
 
                       case "/login":
-                          bool login = Login(command);
+                        bool login = Login(command);
                           break;
 
                       case "/exit":
                           Console.WriteLine("");
                           Console.WriteLine("Bye bye");
                         return;
-                  }           
+                  }
+                if (Login(command))
+                    break;
             }
         }
         #region Menu
@@ -64,8 +67,7 @@ namespace Login_and_Registr
 
                 Console.WriteLine("");
                 Console.WriteLine("You successfully registered, now you can login with your new account!");
-                                
-                
+                                                
                 Profile profile = new Profile(firstName, lastName, email, password);
                 profiles.Add(profile);
 
@@ -75,15 +77,36 @@ namespace Login_and_Registr
         }
         public static bool Login(string command) ////Didnt completed
         {
-            if (command == "/login")
-            {                
+            
+            string firstName, lastName, email, password;
+            firstName = "Super";
+            lastName = "Admin";
+            email = "admin@gmail.com";
+            password = "123321";
+
+            Profile admin = new Profile(firstName, lastName, email, password);
+            profiles.Add(admin);
 
 
-
-
-
-                return true;
-            }
+            Console.Write("Entry email : ");
+            string entryEmail = Console.ReadLine()!;
+            Console.Write("Entry password : ");
+            string entryPassword = Console.ReadLine()!;
+           
+                foreach (Profile profile in profiles)
+                {
+                    if(profile._email == entryEmail && profile._password == entryPassword)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("Welcome to your account, our dear admin " + profile._firstName + profile._lastName + " !");
+                        Console.WriteLine("");
+                        Console.WriteLine("");
+                        Console.WriteLine("");
+                        Console.WriteLine("");
+                    return true;
+                    }
+                }
+            Console.WriteLine("Pls add correct email or password!");
             return false;
         }
         #endregion
