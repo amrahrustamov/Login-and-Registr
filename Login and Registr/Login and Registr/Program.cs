@@ -12,11 +12,11 @@ namespace Login_and_Registr
         public Profile(string firstName, string lastName, string email, string password)
         {
             _firstName = firstName;
-            _lastName  = lastName;
-            _email     = email;
-            _password  = password;
-        }        
-    }    
+            _lastName = lastName;
+            _email = email;
+            _password = password;
+        }
+    }
     internal class Program
     {
         public static List<Profile> profiles = new List<Profile>();
@@ -51,6 +51,7 @@ namespace Login_and_Registr
                   }
             }
         }
+
         #region Menu
         public static bool Register(string command)
         {
@@ -71,7 +72,7 @@ namespace Login_and_Registr
             }
             return false;
         }
-        public static bool Login(string command) ////Didnt completed
+        public static bool Login(string command)
         {            
             string firstName, lastName, email, password;
             firstName = "Super";
@@ -164,17 +165,43 @@ namespace Login_and_Registr
         }
         static bool IsEmailTrue(ref string email)
         {
-            while (true)
-            {               
-                for (int i = 0; i < email.Length; i++)
+            char[] lowerLetters = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+            char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+            int k = 0;
+            for (int j = 0; j < lowerLetters.Length; j++)
+            {
+                if (email[0] == lowerLetters[j])
                 {
-                    if (email[i] == '@')
-                        return true;
+                    k++;
+                    break;
                 }
+            }
+            for (int c = 0; c < numbers.Length; c++)
+            {
+                if (email[0] == numbers[c])
+                {
+                    k++;
+                    break;
+                }
+            }
+            if (k <= 0)
+            {
                 Console.WriteLine("Incorrect input!");
-                Console.WriteLine("Email must contain 1 '@' symbol");
+                Console.WriteLine("The first character must be a letter or a number.");
                 return false;
             }
+            while (true)
+            {
+                 for (int i = 0; i < email.Length; i++)
+                 {
+                     if (email[i] == '@')
+                         return true;
+                 }
+                  Console.WriteLine("Incorrect input!");
+                  Console.WriteLine("Email must contain 1 '@' symbol");
+                  return false;
+            }                
         }
         static bool IsEmailExists(ref string email)
         {
