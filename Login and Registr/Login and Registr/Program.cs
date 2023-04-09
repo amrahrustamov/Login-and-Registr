@@ -50,7 +50,7 @@ namespace Login_and_Registr
                   }
             }
         }
-
+         
         #region Menu
         public static bool Register(string command)
         {
