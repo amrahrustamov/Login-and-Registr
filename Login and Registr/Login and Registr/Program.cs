@@ -19,8 +19,7 @@ namespace Login_and_Registr
     }
     internal class Program
     {
-        public static List<Profile> profiles = new List<Profile>();
-        
+        public static List<Profile> profiles = new List<Profile>();       
         static void Main(string[] args)
         {
             while (true)
@@ -56,8 +55,7 @@ namespace Login_and_Registr
         public static bool Register(string command)
         {
             string firstName,lastName,email, password;           
-            if (command == "/register")
-            {                
+                            
                 bool isFirstNameLengthTrue = IsFirstNameLength(out firstName);
                 bool isLastNameLengthTrue = IsLastNameLength(out lastName);
                 bool isEmail = IsEmail(out email);
@@ -69,16 +67,13 @@ namespace Login_and_Registr
                 Profile profile = new Profile(firstName, lastName, email, password);
                 profiles.Add(profile);
                 return true;                
-            }
-            return false;
         }
         public static bool Login(string command)
         {            
-            string firstName, lastName, email, password;
-            firstName = "Super";
-            lastName = "Admin";
-            email = "admin@gmail.com";
-            password = "123321";
+             string firstName = "Super";
+             string lastName = "Admin";
+             string email = "admin@gmail.com";
+             string password = "123321";
 
             Profile admin = new Profile(firstName, lastName, email, password);
             profiles.Add(admin);
@@ -114,8 +109,7 @@ namespace Login_and_Registr
                     }
                 }
               Console.WriteLine("Pls add correct email or password!");
-            }
-            
+            }          
         }
         #endregion
 
@@ -188,7 +182,7 @@ namespace Login_and_Registr
             if (k <= 0)
             {
                 Console.WriteLine("Incorrect input!");
-                Console.WriteLine("The first character must be a letter or a number.");
+                Console.WriteLine("The first character must be a lower case letter or a number.");
                 return false;
             }
             while (true)
